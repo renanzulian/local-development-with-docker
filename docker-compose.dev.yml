@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  bank:
+    build: 
+      context: ./app/bank/
+    ports:
+      - 8000:8000
+    volumes:
+      - ./app/bank:/app
+    command: deno run --allow-net --watch src/server.ts
+  tax:
+    build: 
+      context: ./app/tax/
+    ports:
+      - 8001:8001
+    volumes:
+      - ./app/tax:/app
+    command: gin -p 8001 -a 8080 run main.go
